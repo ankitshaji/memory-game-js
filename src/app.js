@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cardArray.sort(() => 0.5 - Math.random());
   const grid = document.querySelector(".grid");
+  const resultDisplay = document.querySelector("#result");
   let cardsChosen = [];
   let cardsChosenIds = [];
   let cardsWon = [];
@@ -94,9 +95,17 @@ document.addEventListener("DOMContentLoaded", () => {
       cards[optionOneId].removeEventListener("click", flipCard);
       cards[optionTwoId].removeEventListener("click", flipCard);
       cardsWon.push(cardsChosen);
+    } else {
+      cards[optionOneId].setAttribute("src", "src/images/blank.png");
+      cards[optionTwoId].setAttribute("src", "src/images/blank.png");
+      alert("Sorry, try again");
     }
     cardsChosen = [];
     cardsChosenIds = [];
+    resultDisplay.textContent = cardsWon.length;
+    if (cardsWon.length === cardArray.length / 2) {
+      resultDisplay.textContent = "You have won";
+    }
   }
 
   createBoard();
